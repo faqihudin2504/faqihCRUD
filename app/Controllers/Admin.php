@@ -374,6 +374,10 @@ class Admin extends BaseController
         }
         else{
             $dataAnggota = $modelAnggota->getDataAnggota(['id_anggota' => $idAnggota])->getRowArray();
+            if (!$dataAnggota) {
+            session()->setFlashdata('error', 'Data anggota tidak ditemukan!');
+            return redirect()->to(base_url('transaksi/peminjaman-step-1')); // atau halaman lain yang sesuai
+}
             $dataBuku = $modelBuku->getDataBukuJoin()->getResultArray();
 
             $jumlahTemp = $modelPeminjaman->getDataTemp(['id_anggota' => $idAnggota])->getNumRows();

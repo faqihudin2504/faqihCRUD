@@ -21,6 +21,11 @@
                     <div class="form-group col-md-6">
                         <label>Nama Anggota</label>
                         <br /><?= $dataAnggota['nama_anggota'];?>
+                        <?php if (!empty($dataAnggota) && isset($dataAnggota['nama_anggota'])): ?>
+                        <br /><?= esc($dataAnggota['nama_anggota']); ?>
+                        <?php else: ?>
+                        <br /><span style="color:red;">Nama anggota tidak tersedia</span>
+                        <?php endif; ?>
                     </div>
                     <div style="clear:both;"></div>
                     <br />
@@ -51,7 +56,7 @@
                                 <td data-sortable="true">
                                     <a href="#" onclick="doDelete('<?= sha1($data['id_buku']);?>')">
                                         <button type="button" class="btn btn-warning">
-                                            <span class="glyphicon glyphicon-trash"></span> Hapus
+                                            <span class="glyphicon glyphicon-trash"></span> Ha\s
                                         </button>
                                     </a>
                                 </td>

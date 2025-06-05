@@ -33,7 +33,6 @@
                 </li>
             </ul>
         </li>
-        <li role="presentation" class="divider"></li>
         <li class="parent">
             <a href="#">
                 <span class="glyphicon glyphicon-list"></span> Transaksi <span data-toggle="collapse" href="#sub-item-peminjaman" class="icon pull-right"><em class="glyphicon glyphicon-s glyphicon-plus"></em></span>
@@ -45,12 +44,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<?= base_url('anggota/peminjaman-step-2'); ?>">
+                    <a href="<?= base_url('admin/peminjaman-step-2'); ?>">
                         <span class="glyphicon glyphicon-share-alt"></span> Peminjaman Step 2
                     </a>
                 </li>  
             </ul>
         </li>
+        <li role="presentation" class="divider"></li>
         <li><a href="<?= base_url('admin/logout'); ?>"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
     </ul>
     <div class="attribution">Template by <a href="http://www.medialoot.com/item/lumino-admin-bootstrap-template/">Medialoot</a></div>
