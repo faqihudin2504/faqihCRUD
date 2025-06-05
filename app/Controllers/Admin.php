@@ -3,7 +3,7 @@
 namespace App\Controllers;
 //load models
 use App\Models\M_Admin;
-
+use App\Models\M_Peminjaman;
 
 class Admin extends BaseController
 {
@@ -329,5 +329,67 @@ class Admin extends BaseController
             document.location = "<?= base_url('admin/login-admin');?>";
         </script>
         <?php
+    }
+
+    public function peminjaman_step1()
+    {
+        $uri = service('uri');
+        $page = $uri->getSegment(2);
+
+        $data['page'] = $page;
+        $data['web_title'] = "Transaksi Peminjaman";
+
+        echo view('Backend/Template/header', $data);
+        echo view('Backend/Template/sidebar', $data);
+        echo view('Backend/Transaksi/peminjaman-step-1', $data);
+        echo view('Backend/Template/footer', $data);
+    }
+
+    public function peminjaman_step2()
+    {
+        $modelAnggota = newAnggota;
+        $modelBuku = new M_Buku;
+        $modelPeminjaman = new M_Peminjaman;
+        $uri = service('uri');
+        $page = $uri->getSegment(2);
+
+        if($this->request->getPost('id_anggota')){
+            $idAnggota = $this->request->getPost('id_anggota');
+            session()->set(['idAgt' => $idAnggota]);
+        }
+        else{
+            $idAnggota = session()->get('idAgt');
+        }
+
+        $cekPeminjaman = $modelPeminjaman->getDataPeminjaman(['id_anggota' => $idAnggota, 'status_transaksi' => "Berjalan"])->getNumRows();
+        if($cekPeminjaman > 0){
+            session()->setFlashdata('error','Transaksi Tidak Dapat Dilakukan, Masih Ada Transaksi Peminjaman yang Belum Diselesaikan!!');
+            ?>
+            <script>
+                history.go(-1);
+            </script>
+            <?php
+        }
+        else{
+            $dataAnggota = $modelAnggota->getDataAnggota(['id_anggota' => $idAnggota])->getRowArray();
+            $dataBuku = $modelBuku->getDataBukuJoin()->getResultArray();
+
+            $jumlahTemp = $modelPeminjaman->getDataTemp(['id_anggota' => $idAnggota])->getNumRows();
+            $data['jumlahTemp'] = $jumlahTemp;
+            // Mengambil data keseluruhan buku dari table buku di database
+
+            $dataTemp = $modelPeminjaman->getDataTempJoin(['tbl_temp_peminjaman.id_anggota' => $idAnggota])->getResultArray();
+
+            $data['page'] = $page;
+            $data['web_title'] = 'Transaksi Peminjaman';
+            $data['dataAnggota'] = $dataAnggota;
+            $data['dataBuku'] = $dataBuku;
+            $data['dataTemp'] = $dataTemp;
+
+            echo view('Backend/Template/header', $data);
+            echo view('Backend/Template/sidebar', $data);
+            echo view('Backend/Transaksi/peminjaman-step-2', $data);
+            echo view('Backend/Template/footer', $data);
+        }
     }
 }
