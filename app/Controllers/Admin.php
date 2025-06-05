@@ -3,6 +3,8 @@
 namespace App\Controllers;
 //load models
 use App\Models\M_Admin;
+use App\Models\M_Anggota;
+use App\Models\M_Buku;
 use App\Models\M_Peminjaman;
 
 class Admin extends BaseController
@@ -347,7 +349,7 @@ class Admin extends BaseController
 
     public function peminjaman_step2()
     {
-        $modelAnggota = newAnggota;
+        $modelAnggota = new M_Anggota;
         $modelBuku = new M_Buku;
         $modelPeminjaman = new M_Peminjaman;
         $uri = service('uri');

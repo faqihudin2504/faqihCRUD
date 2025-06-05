@@ -43,4 +43,15 @@ class M_Buku extends Model
         $builder->limit(1);
         return $query = $builder->get();
     }
+
+    public function getDataBukuJoin()
+    {
+        return $this->db->table($this->table)
+            ->select('tbl_buku.*, tbl_kategori.nama_kategori')
+            ->join('tbl_kategori', 'tbl_kategori.id_kategori = tbl_buku.id_kategori')
+            ->where('tbl_buku.is_delete_buku', '0') // optional: untuk hanya ambil yang tidak dihapus
+            ->orderBy('judul_buku', 'ASC')
+            ->get();
+    }
+
 }

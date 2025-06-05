@@ -11,18 +11,18 @@ class M_Anggota extends Model
 
     public function getDataAnggota($where = false)
     {
-        if ($where === false) {
-            return $this->db->table($this->table)
-                ->where('is_delete_anggota', '0')
-                ->orderBy('nama_anggota', 'ASC')
-                ->get();
-        } else {
-            return $this->db->table($this->table)
-                ->where($where)
-                ->orderBy('nama_anggota', 'ASC')
-                ->get();
+        $builder = $this->db->table($this->table);
+        $builder->orderBy('nama_anggota', 'ASC');
+
+        if ($where !== false) {
+            $builder->where($where);
         }
+        
+        $builder->where('is_delete_anggota', '0');
+
+        return $builder->get();
     }
+
 
     public function saveDataAnggota($data)
     {
