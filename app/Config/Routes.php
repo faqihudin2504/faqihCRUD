@@ -26,6 +26,8 @@ $routes->post('/admin/simpan-admin', 'Admin::simpan_data_admin');
 $routes->get('/admin/edit-data-admin/(:alphanum)', 'Admin::edit_data_admin/$1');
 $routes->post('/admin/update-admin', 'Admin::update_data_admin');
 $routes->get('/admin/hapus-data-admin/(:alphanum)', 'Admin::hapus_data_admin/$1');
+
+//Module Peminjaman
 $routes->get('/admin/data-transaksi-peminjaman', 'Admin::data_transaksi_peminjaman');
 $routes->get('/admin/peminjaman-step-1', 'Admin::peminjaman_step1');
 $routes->get('/admin/tes-qr', 'Admin::tes_qr');
@@ -67,3 +69,7 @@ $routes->post('/buku/update-data-buku', 'Buku::update_data_buku');
 $routes->get('/buku/hapus-data-buku/(:alphanum)', 'Buku::hapus_data_buku/$1');
 $routes->get('/buku/input-data-buku', 'Buku::input_data_buku');
 $routes->post('/buku/simpan-data-buku', 'Buku::simpan_data_buku');
+
+//Routes untuk halaman data peminjaman
+$routes->get('admin/data-transaksi-peminjamann', 'Admin::dataTransaksiPeminjaman');
+$routes->get('admin/detail-transaksi/(:any)', 'Admin::detailTransaksi/$1');

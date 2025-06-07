@@ -64,7 +64,7 @@
                                 </td>
                                 <td>
                                     <?php if($data['cover_buku']): ?>
-                                        <img src="<?= base_url('uploads/cover_buku/'.$data['cover_buku']); ?>" width="50">
+                                        <img src="<?= base_url('/uploads/cover_buku/'.$data['cover_buku']); ?>" width="50">
                                     <?php else: ?>
                                         <span class="text-muted">No Cover</span>
                                     <?php endif; ?>
